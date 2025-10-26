@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>JS 테트리스 게임</title>
+  <style>
+    html, body { width:100vw; height:100vh; margin:0; padding:0; background: #1a1831; }
+    body { display:flex; justify-content:center; align-items:center; }
+    .wrap {
+      background: linear-gradient(120deg,#30336b,#00b894);
+      padding:26px 20px 17px 32px; border-radius: 16px;
+      box-shadow: 0 8px 45px #000a, 0 0 50px #47d6b0cc inset;
+    }
+    canvas { background:#2e295b; border-radius:10px; }
+    .info {
+        text-align:center; color:#f8fffc;
+        margin-bottom: 7px;
+        text-shadow: 0 2px 8px #222b;
+        font-weight:bold; font-size:1.1em;
+        letter-spacing: 1px;
+    }
+    .btn {
+      margin-top:12px;
+      margin-left:7px;
+      background:linear-gradient(60deg,#f7971e,#ffd200 75%, #f7971e);
+      color:#222; border:none; font-weight:bold; border-radius:16px; padding:11px 23px;
+      cursor:pointer; box-shadow:0 2px 15px #2222;
+      font-size:1em;letter-spacing:3px;
+    }
+    .btn:hover {filter:brightness(1.08);}
+    @media (max-width:680px){ .wrap {padding:0 0 8px 0;} canvas{width:92vw !important;height:161vw !important;}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="info">
+    <div id="title" style="font-size:1.5em;letter-spacing:7px;">JS TETRIS</div>
+    <div id="score" style="font-size:1.26em;margin:7px 0 5px 0;color:#fffb97;text-shadow:0 2px 11px #d7bb527d,0 0 1px #fff;">SCORE: 0</div>
+    <div style="font-size:.96em;margin:8px 0 2px 0;opacity:.87">← → : 이동 / ↑ : 회전 / ↓ : 소프트 드랍 / 스페이스 : 하드드랍&nbsp;&nbsp;Tab: Hold&nbsp;&nbsp;ESC: 정지/재개&nbsp;&nbsp;R: 리셋</div>
+  </div>
+  <div style="display:flex; gap:24px; align-items:start;">
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div style="font-size:1.1em;color:#b5f7ea;margin-bottom:8px;text-shadow:0 1px 9px #0006;">HOLD</div>
+      <canvas id="hold-canvas" width="120" height="120" style="background:#25345b;border-radius:14px;box-shadow:0 1px 10px #0005;"></canvas>
+    </div>
+    <canvas id="tetris" width="300" height="540"></canvas>
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div style="font-size:1.1em;color:#ffe066;margin-bottom:8px;text-shadow:0 1px 9px #0006;">NEXT</div>
+      <canvas id="next-canvas" width="120" height="120" style="background:#30336b;border-radius:14px;box-shadow:0 1px 10px #0005;"></canvas>
+    </div>
+  </div>
+  <div style="text-align:center">
+    <button class="btn" onclick="resetGame()">게임 리셋</button>
+  </div>
+</div>
+<script>
+// --- 테트리스 상수, 색, 블록 정의 ---
+const COLS = 10, ROWS = 18, BSZ = 30;
+const COLORS = ['#fff','#16e2f5','#f8b400','#25f573','#e645b8','#6366f1','#fc4067','#ffd93d','#00cecb','#f85f36'];
+
+const SHAPES = [
+  [], // 없음
+  [ [1,1,1,1] ],                // I
+  [ [2,0,0],[2,2,2] ],          // J
+  [ [0,0,3],[3,3,3] ],          // L
+  [ [4,4],[4,4] ],              // O
+  [ [0,5,5],[5,5,0] ],          // S
+  [ [0,6,0],[6,6,6] ],          // T
+  [ [7,7,0],[0,7,7] ],          // Z
+];
+
+// --- 게임 상태 변수 ---
+let grid, curr, next, hold, canHold, score, gameOver, dropTimer, softDrop = false, paused = false;
+let level = 1, maxLevel = 5, clearedLines = 0;
+let stageTimer = 0, timerInterval;
+let garbageInterval = null, garbageTimer = null;
+
+// --- 블록 관련 ---
+function randomBlock() {
+    const id = Math.floor(Math.random()*7)+1;
+    const shape = SHAPES[id].map(r=>r.slice());
+    return { shape, id, x: 3, y: 0 };
+}
+
+function rotate(mat){
+    return mat[0].map( (_,i) => mat.map(r=>r[i]).reverse() );
+}
+
+function isValid({shape,x,y}) {
+    for(let r=0;r<shape.length;r++){
+        for(let c=0;c<shape[r].length;c++){
+            if(!shape[r][c]) continue;
+            let nx = x + c, ny = y + r;
+            if(nx < 0 || nx >= COLS || ny < 0 || ny >= ROWS) return false;
+            if(grid[ny][nx]) return false;
+        }
+    }
+    return true;
+}
+
+function mergeBlock({shape,x,y,id}){
+    for(let r=0;r<shape.length;r++){
+        for(let c=0;c<shape[r].length;c++){
+            if(shape[r][c]) grid[y+r][x+c]=id;
+        }
+    }
+}
+
+// --- 게임 루프, 그리기 ---
+const canvas = document.getElementById('tetris');
+const ctx = canvas.getContext('2d');
+canvas.width = COLS * BSZ;
+canvas.height = ROWS * BSZ;
+
+const nextCanvas = document.getElementById('next-canvas');
+const nctx = nextCanvas.getContext('2d');
+
+const holdCanvas = document.getElementById('hold-canvas');
+const hctx = holdCanvas.getContext('2d');
+
+function drawCell(x,y,v,glow=0,ghost=0){
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x*BSZ+2,y*BSZ+2,BSZ-4,BSZ-4);
+    ctx.closePath();
+    if(ghost) {
+        ctx.fillStyle=COLORS[v];
+        ctx.globalAlpha=0.36;
+        ctx.strokeStyle = '#fff9';
+        ctx.lineWidth = 1.6;
+        ctx.fill(); ctx.stroke();
+    } else {
+        ctx.fillStyle=COLORS[v];
+        ctx.shadowColor = COLORS[v];
+        ctx.shadowBlur = glow?15:0;
+        ctx.fill();
+        if(v){
+            ctx.globalAlpha=0.29;
+            ctx.fillStyle="#fff";
+            ctx.beginPath();
+            ctx.ellipse(x*BSZ+BSZ/2,y*BSZ+11,BSZ*0.34,10,0,0,Math.PI*2);
+            ctx.fill();
+            ctx.globalAlpha=1;
+        }
+    }
+    ctx.restore();
+}
+
+function getGhostPos(){
+    let {shape,x,y,id} = curr;
+    let gy = y;
+    while(true){
+        let next = {shape,x,y:gy+1};
+        if(isValid(next)) { gy++; } else break;
+    }
+    return {shape:curr.shape, x:curr.x, y:gy, id:curr.id};
+}
+
+function drawGhost(){
+    if(!curr) return;
+    const ghost = getGhostPos();
+    const {shape,x,y,id} = ghost;
+    for(let r=0;r<shape.length;r++)
+        for(let c=0;c<shape[r].length;c++)
+            if(shape[r][c]) drawCell(x+c,y+r,id,0,1);
+}
+
+function drawGrid(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(let y=0;y<ROWS;y++) for(let x=0;x<COLS;x++) {
+        let v = grid[y][x];
+        if(v) drawCell(x,y,v,0);
+    }
+}
+function drawCurr(){
+    const {shape,x,y,id}=curr;
+    for(let r=0;r<shape.length;r++)
+        for(let c=0;c<shape[r].length;c++)
+            if(shape[r][c]) drawCell(x+c,y+r,id,1);
+}
+
+function drawNext(){
+    for(let r=0; r<4; r++) for(let c=0; c<4; c++){
+        ctx.save();
+        ctx.globalAlpha=0.24;
+        ctx.beginPath(); ctx.rect((COLS+2+c)*BSZ,BSZ+r*BSZ,BSZ-8,BSZ-8); ctx.fillStyle="#f1c40f"; ctx.fill(); ctx.restore();
+    }
+    for(let r=0;r<next.shape.length;r++)
+        for(let c=0;c<next.shape[r].length;c++)
+            if(next.shape[r][c]) drawCell(COLS+3+c,1+r,next.id,1);
+    ctx.save();        ctx.globalAlpha=0.7;
+    ctx.font='bold 18px Arial';
+    ctx.fillStyle='#fff';
+    ctx.fillText('NEXT', (COLS+4.2)*BSZ,BSZ*0.7);
+    ctx.restore();
+}
+
+function drawNextSmall(){
+    nctx.clearRect(0,0,nextCanvas.width,nextCanvas.height);
+    // 배경
+    nctx.save();
+    nctx.shadowColor='#71fff9';nctx.shadowBlur=5;
+    nctx.beginPath();nctx.rect(0,0,120,120);
+    nctx.closePath();nctx.fillStyle="#30336b";nctx.fill();
+    nctx.restore();
+    let shape=next.shape, id=next.id;
+    // 중앙정렬 계산
+    let W=shape[0].length, H=shape.length;
+    let ox=parseInt((4-W)*15), oy=parseInt((4-H)*15);
+    for(let y=0; y<H; y++) for(let x=0; x<W; x++){
+        if(shape[y][x]) drawNextCell(x*30+ox,y*30+oy,id);
+    }
+}
+function drawNextCell(x,y,v){
+    nctx.save();
+    nctx.beginPath();
+    nctx.rect(x+8,y+8,30-6,30-6);
+    nctx.closePath();
+    nctx.fillStyle=COLORS[v];
+    nctx.shadowColor = COLORS[v];
+    nctx.shadowBlur = 11;
+    nctx.fill();
+    nctx.globalAlpha=0.24;
+    nctx.fillStyle="#fff";
+    nctx.beginPath();
+    nctx.ellipse(x+15+8,y+12+8,12,4,0,0,Math.PI*2);
+    nctx.fill();
+    nctx.globalAlpha=1;
+    nctx.restore();
+}
+
+function drawHoldSmall(){
+    hctx.clearRect(0,0,holdCanvas.width,holdCanvas.height);
+    // 배경
+    hctx.save();
+    hctx.shadowColor='#b5fff9'; hctx.shadowBlur=5;
+    hctx.beginPath(); hctx.rect(0,0,120,120); hctx.closePath();
+    hctx.fillStyle="#25345b"; hctx.fill(); hctx.restore();
+    if(!hold) return;
+    let shape=hold.shape, id=hold.id;
+    let W=shape[0].length, H=shape.length;
+    let ox=parseInt((4-W)*15), oy=parseInt((4-H)*15);
+    for(let y=0; y<H; y++) for(let x=0; x<W; x++){
+        if(shape[y][x]) drawHoldCell(x*30+ox,y*30+oy,id);
+    }
+}
+function drawHoldCell(x,y,v){
+    hctx.save();
+    hctx.beginPath();
+    hctx.rect(x+8,y+8,30-6,30-6);
+    hctx.closePath();
+    hctx.fillStyle=COLORS[v];
+    hctx.shadowColor = COLORS[v];
+    hctx.shadowBlur = 11;
+    hctx.fill();
+    hctx.globalAlpha=0.2;
+    hctx.fillStyle="#fff";
+    hctx.beginPath();
+    hctx.ellipse(x+15+8,y+12+8,12,4,0,0,Math.PI*2);
+    hctx.fill();
+    hctx.globalAlpha=1;
+    hctx.restore();
+}
+
+function drawAll(){
+    drawGrid();
+    drawGhost();
+    if(curr) drawCurr();
+    if(next) drawNext();
+    drawNextSmall();
+    drawHoldSmall();
+    // 레벨/스테이지 텍스트
+    ctx.save();
+    ctx.font = 'bold 24px Arial'; ctx.globalAlpha=0.92;
+    ctx.fillStyle = '#70efa9';
+    ctx.textAlign='right';
+    ctx.fillText(`Stage ${level} / ${maxLevel}   ${stageTimer}s`, canvas.width-10, 38);
+    ctx.restore();
+    if(gameOver){
+        ctx.save();
+        ctx.globalAlpha=0.85;
+        ctx.fillStyle='#fd3434';
+        ctx.font='bold 50px Arial';
+        ctx.textAlign='center';
+        ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2);
+        ctx.globalAlpha=1;
+        ctx.font='24px Arial';
+        ctx.fillStyle='#fff';
+        ctx.fillText('점수: '+score, canvas.width/2,canvas.height/2+52);
+        ctx.restore();
+    }
+    if(paused && !gameOver){
+        ctx.save();
+        ctx.globalAlpha=0.87;
+        ctx.fillStyle='#44f2fa';
+        ctx.font='bold 55px Arial';
+        ctx.textAlign='center';
+        ctx.fillText('PAUSED', canvas.width/2, canvas.height/2);
+        ctx.restore();
+    }
+}
+
+// 방해블록 생성 함수
+function addGarbageRows(n){
+    for(let i=0;i<n;i++){
+        // 한 칸만 랜덤하게 비운 줄
+        let row = Array(COLS).fill(8); // 방해블록 id: 8(노란색)
+        let hole = Math.floor(Math.random()*COLS);
+        row[hole]=0;
+        grid.shift(); // 맨 위 한줄 삭제
+        grid.push(row); // 맨 아랫줄에 방해삽입
+    }
+}
+// 레벨업 체크 및 진행
+function checkLevelUp(){
+    let nextTarget = level*10; // 10줄씩
+    if(clearedLines >= nextTarget && level < maxLevel){
+        level++;
+        addGarbageRows(level); // 레벨 올라갈 때마다 방해블록 추가
+        setDropInterval();
+        resetStageTimer();
+        startGarbageTimer(); // 새 interval 반영
+        setTimeout(()=>{
+            alert(`Stage ${level}!\n아래에서 방해블록이${level}줄 올라옵니다.`);
+        }, 120);
+    } else if(level===maxLevel && clearedLines>=maxLevel*10) {
+        setTimeout(()=>{alert('축하합니다! 5스테이지 클리어!!');stopStageTimer();stopGarbageTimer();resetGame();drawAll();}, 300);
+    }
+}
+// dropInterval (블록 드랍 속도) 변경
+let dropInterval = 380;
+function setDropInterval() {
+    dropInterval = 380-Math.floor((level-1)*60);
+    clearInterval(dropTimer);
+    dropTimer = setInterval(()=>{
+        if(!gameOver && !paused){
+            if(softDrop) move(0,1); else step();
+            drawAll();
+        }
+    }, dropInterval);
+}
+
+// --- 게임 초기화 및 로직 ---
+function resetGame(){
+    grid = Array.from({length:ROWS},()=>Array(COLS).fill(0));
+    curr = randomBlock();
+    next = randomBlock();
+    hold = null; canHold = true;
+    score=0; gameOver=false; paused=false;
+    level=1; clearedLines=0;
+    setScore();
+    setDropInterval();
+    addGarbageRows(1); // 1스테이지 시작시 1줄 생성
+    drawNextSmall();drawHoldSmall();
+    resetStageTimer();
+    startGarbageTimer();
+}
+
+function setScore(){
+    document.getElementById('score').textContent = 'SCORE: '+score;
+}
+
+function step(){
+    if(gameOver || paused) return;
+    let moved = move(0,1);
+    if(!moved){
+        mergeBlock(curr);
+        let lines = clearLines();
+        if(lines) { score+= [0,100,300,700,1500][lines]; setScore(); }
+        curr = next; next = randomBlock();
+        if(!isValid(curr)) { gameOver=true; }
+        canHold = true;
+    }
+    drawAll();
+}
+
+function move(dx,dy){
+    let tc = {...curr, x:curr.x+dx, y:curr.y+dy};
+    if(isValid(tc)){curr=tc; return true;} return false;
+}
+
+function rotateBlock(){
+    let rot = rotate(curr.shape);
+    let tc = {...curr, shape:rot};
+    if(isValid(tc)){ curr.shape=rot; return true; }
+    // 벽 밀기(wall kick) 시도
+    if(isValid({...tc,x:curr.x-1})){ curr.x--; curr.shape=rot; return true; }
+    if(isValid({...tc,x:curr.x+1})){ curr.x++; curr.shape=rot; return true; }
+    return false;
+}
+
+function hardDrop(){
+    while(move(0,1));
+    step(); // 즉시 고정
+}
+
+function clearLines(){
+    let n=0;
+    for(let y=ROWS-1;y>=0;y--){
+        if(grid[y].every(v=>v)){
+            grid.splice(y,1);
+            grid.unshift(Array(COLS).fill(0));
+            n++; y++;
+        }
+    }
+    if(n){
+        clearedLines+=n;
+        checkLevelUp();
+    }
+    return n;
+}
+
+function holdBlock(){
+    if(!canHold) return;
+    if(!hold) {
+        hold = { shape: curr.shape.map(r=>r.slice()), id: curr.id };
+        curr = next;
+        next = randomBlock();
+    } else {
+        // 교체
+        let temp = hold;
+        hold = { shape: curr.shape.map(r=>r.slice()), id: curr.id };
+        curr = { shape: temp.shape.map(r=>r.slice()), id: temp.id, x:3, y:0 };
+    }
+    canHold = false;
+    drawHoldSmall(); drawAll();
+}
+
+// --- 루프 및 입력 ---
+function startStageTimer() {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        if (!paused && !gameOver) {
+            stageTimer++;
+            drawAll();
+        }
+    }, 1000);
+}
+function resetStageTimer() {
+    stageTimer = 0;
+    drawAll();
+    startStageTimer();
+}
+function stopStageTimer() { clearInterval(timerInterval); }
+
+function startGarbageTimer() {
+    clearInterval(garbageTimer);
+    let interval = Math.max(3000 - (level-1)*600, 900); // 3초~0.9초(5레벨)
+    garbageTimer = setInterval(()=>{
+        if (!paused && !gameOver) {
+            addGarbageRows(1);
+            drawAll();
+        }
+    }, interval);
+}
+function stopGarbageTimer() { clearInterval(garbageTimer); }
+
+resetGame();
+drawAll();
+
+window.addEventListener('keydown', e=>{
+    if(gameOver && e.key.toLowerCase()==='r') { stopGarbageTimer();resetGame(); drawAll(); return; }
+    if(gameOver) return;
+    if(e.key==='Escape') {
+        paused=!paused; drawAll();
+        if(paused) { stopStageTimer(); stopGarbageTimer(); }
+        else { startStageTimer(); startGarbageTimer(); }
+        return;
+    }
+    if(paused) return; // pause면 입력 무시
+    if(e.key==='Tab') { e.preventDefault(); holdBlock(); }
+    if(e.key==='ArrowLeft')  { move(-1,0); drawAll(); }
+    if(e.key==='ArrowRight') { move(1,0); drawAll(); }
+    if(e.key==='ArrowDown')  { softDrop=true;move(0,1); drawAll(); }
+    if(e.key==='ArrowUp')    { rotateBlock(); drawAll(); }
+    if(e.key===' '){ e.preventDefault();hardDrop();drawAll(); }
+});
+
+</script>
+</body>
+</html>
