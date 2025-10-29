@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mxfile host="app.diagrams.net" modified="2025-10-29T13:50:52.000Z" agent="python-generator" version="22.0.8" editor="www.diagrams.net">
+  <diagram id="page-1" name="새싹아이 전체 플로우">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="home" value="🏠 Home" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#10b981;strokeColor:#059669;" vertex="1" parent="1">
+          <mxGeometry x="100" y="100" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="feature" value="주요 기능 안내" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="100" y="240" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="hiw" value="작동 방식 설명" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="240" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="identify" value="📷 Identify (식물 식별)" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#fef3c7;strokeColor:#d97706;" vertex="1" parent="1">
+          <mxGeometry x="460" y="100" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="care" value="📋 Care (식물 관리법)" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#fef3c7;strokeColor:#d97706;" vertex="1" parent="1">
+          <mxGeometry x="720" y="100" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="growth" value="📈 Growth (성장 예측)" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#fef3c7;strokeColor:#d97706;" vertex="1" parent="1">
+          <mxGeometry x="980" y="100" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="mychild" value="📅 우리아이" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#fef3c7;strokeColor:#d97706;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="100" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="서비스 소개" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="home" target="feature">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="더 알아보기" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="home" target="hiw">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="시작하기" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="home" target="identify">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="identify" target="care">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="identify" target="growth">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="identify" target="mychild">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="upload" value="이미지 선택" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#ffd966;strokeColor:#bf9000;" vertex="1" parent="1">
+          <mxGeometry x="460" y="220" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="valid" value="형식 확인" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#ffd966;strokeColor:#bf9000;" vertex="1" parent="1">
+          <mxGeometry x="460" y="300" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="err" value="❌ 오류 메시지" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#f8cecc;strokeColor:#b85450;" vertex="1" parent="1">
+          <mxGeometry x="640" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="loading" value="🤖 AI 식별 중" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="460" y="380" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="result" value="✅ 결과 목록" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#d5e8d4;strokeColor:#82b366;" vertex="1" parent="1">
+          <mxGeometry x="640" y="380" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" value="이미지 업로드" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="identify" target="upload">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" value="유효성 검사" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="upload" target="valid">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" value="실패" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="valid" target="err">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" value="성공" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="valid" target="loading">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e11" value="AI 결과" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="loading" target="result">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="care_tips" value="관리법 확인" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="720" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="care_rec" value="환경 기록 입력" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="720" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="care_save" value="💾 저장" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#d5e8d4;strokeColor:#82b366;" vertex="1" parent="1">
+          <mxGeometry x="720" y="380" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="e12" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="care" target="care_tips">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e13" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="care" target="care_rec">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e14" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="care_rec" target="care_save">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="growth_chart" value="📊 성장 차트" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="980" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="growth_pdf" value="📄 PDF 내보내기" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="980" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="e15" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="growth" target="growth_chart">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e16" value="내보내기" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="growth_chart" target="growth_pdf">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="mc_list" value="스케줄 목록" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="mc_add" value="새 스케줄 추가" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="mc_save" value="💾 저장 / CSV" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#d5e8d4;strokeColor:#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="380" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="e17" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="mychild" target="mc_list">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e18" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="mychild" target="mc_add">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e19" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="mc_add" target="mc_save">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

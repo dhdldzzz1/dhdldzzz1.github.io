@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mxfile host="app.diagrams.net" modified="2025-10-29T13:56:10.000Z" agent="python-generator" version="22.0.8" editor="www.diagrams.net">
+  <diagram id="uc-1" name="사용자 유스케이스">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="actor_user" value="사용자" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#111111;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="40" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_admin" value="관리자(옵션)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#111111;" vertex="1" parent="1">
+          <mxGeometry x="80" y="420" width="40" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_ai" value="외부 AI 식별 서비스" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;dashed=1;fillColor=#e3f2fd;strokeColor=#1e88e5;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="220" width="260" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="system" value="새싹아이 시스템" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fillColor=#e8f5e9;strokeColor=#34a853;" vertex="1" parent="1">
+          <mxGeometry x="260" y="80" width="1120" height="620" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc1" value="이미지 업로드" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="340" y="160" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc2" value="식물 종 식별" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="340" y="240" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc3" value="식별 결과 확인(상위 K)" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="340" y="320" width="220" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc4" value="내 식물로 저장" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="340" y="400" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc5" value="관리법 보기" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="620" y="160" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc6" value="환경 기록 저장(일조/급수/메모)" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="620" y="240" width="260" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc7" value="성장 예측 보기(차트)" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="900" y="160" width="210" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc8" value="PDF 리포트 내보내기" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="900" y="240" width="200" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc9" value="스케줄 관리(추가/수정/삭제)" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="620" y="400" width="260" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc10" value="CSV 내보내기(스케줄)" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="900" y="400" width="220" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc11" value="상태/진행 안내(Status)" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="620" y="320" width="210" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="ucA" value="관리법/성장 데이터 유지보수" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=1.5;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="620" y="520" width="280" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc1" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc1">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc2" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc2">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc3" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc3">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc4" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc4">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc5" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc5">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc6" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc6">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc7" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc7">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc8" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc8">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc9" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc9">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc10" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc10">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_uc11" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_user" target="uc11">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_admin" value="" style="endArrow=block;html=1;strokeColor=#333333;" edge="1" parent="1" source="actor_admin" target="ucA">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e_ai1" value="식별 API 호출" style="dashed=1;endArrow=open;html=1;strokeColor=#1e88e5;" edge="1" parent="1" source="uc2" target="ext_ai">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="uc-2" name="유스케이스 그룹 노트">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="note" value="유스케이스 그룹
+
+- 식별: 이미지 업로드, 종 식별, 결과 확인, 저장
+- 관리: 관리법 보기, 환경 기록 저장
+- 예측: 성장 예측 보기, PDF 내보내기
+- 스케줄: 추가/수정/삭제, CSV 내보내기
+- 공통: 상태/진행 안내
+- 운영: 관리자 데이터 유지보수(옵션)" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fillColor=#fff;strokeColor=#999;" vertex="1" parent="1">
+          <mxGeometry x="100" y="100" width="800" height="240" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

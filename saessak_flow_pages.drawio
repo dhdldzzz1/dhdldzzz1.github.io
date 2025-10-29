@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mxfile host="app.diagrams.net" modified="2025-10-29T13:45:56.000Z" agent="python-generator" version="22.0.8" editor="www.diagrams.net">
+  <diagram id="page-1" name="1) 전체 애플리케이션 플로우">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="h" value="🏠 Home" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#10b981;strokeColor:#059669;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="f" value="주요 기능 안내" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="hiw" value="작동 방식 설명" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="260" y="200" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="idn" value="📷 Identify (식물 식별)" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#fef3c7;strokeColor:#d97706;" vertex="1" parent="1">
+          <mxGeometry x="440" y="80" width="200" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="care" value="📋 Care (관리법)" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#fef3c7;strokeColor:#d97706;" vertex="1" parent="1">
+          <mxGeometry x="660" y="80" width="200" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="growth" value="📈 Growth (성장예측)" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#fef3c7;strokeColor:#d97706;" vertex="1" parent="1">
+          <mxGeometry x="880" y="80" width="200" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="mc" value="📅 우리아이" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#fef3c7;strokeColor:#d97706;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="80" width="200" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="서비스 소개" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="h" target="f">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="더 알아보기" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="h" target="hiw">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="시작하기" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="h" target="idn">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="idn" target="care">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="idn" target="growth">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="idn" target="mc">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-2" name="2) Identify">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="s0" value="초기상태" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s1" value="이미지선택" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2" value="검증" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3" value="미리보기" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s4" value="AI 분석중" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="400" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s5" value="결과표시" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="480" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="err" value="오류" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#f8cecc;strokeColor:#b85450;" vertex="1" parent="1">
+          <mxGeometry x="300" y="240" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="s0" target="s1">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="s1" target="s2">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="형식아님" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="s2" target="err">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="유효" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="s2" target="s3">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="식별시작" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="s3" target="s4">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="성공" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="s4" target="s5">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-3" name="3) Care">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="a" value="페이지 진입" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="b" value="식물 ID 유효?" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#ffd966;strokeColor:#bf9000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="c" value="404 페이지" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#f8cecc;strokeColor:#b85450;" vertex="1" parent="1">
+          <mxGeometry x="300" y="160" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="d" value="관리법 표시" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e" value="상세확인" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="f" value="환경기록입력" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="400" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="g" value="저장" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#d5e8d4;strokeColor:#82b366;" vertex="1" parent="1">
+          <mxGeometry x="80" y="480" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="a" target="b">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="No" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="b" target="c">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="Yes" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="b" target="d">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="d" target="e">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="d" target="f">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="저장하기" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="f" target="g">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-4" name="4) Growth">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="u" value="사용자" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="120" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="p" value="Growth 페이지" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="260" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="d" value="성장데이터" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#d5e8d4;strokeColor:#82b366;" vertex="1" parent="1">
+          <mxGeometry x="440" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="pdf" value="PDF 생성기" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="620" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="접속" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="u" target="p">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="데이터 조회" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="p" target="d">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="PDF 내보내기" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="p" target="pdf">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-5" name="5) MyChild">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="s" value="스케줄로드" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="d" value="스케줄 있음?" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#ffd966;strokeColor:#bf9000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="l" value="목록 표시" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="300" y="160" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e" value="추가/수정/삭제" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="sv" value="로컬스토리지 저장" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#d5e8d4;strokeColor:#82b366;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="s" target="d">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="Yes" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="d" target="l">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="No" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="d" target="e">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="저장" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="e" target="sv">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-6" name="6) 데이터 흐름">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="ui" value="UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="120" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="st" value="React State" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="240" y="80" width="120" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="loc" value="로컬스토리지" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="120" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="api" value="API Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="560" y="80" width="120" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="back" value="백엔드 AI 서비스" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="720" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="ui" target="st">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="ui" target="loc">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="ui" target="api">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="api" target="back">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-7" name="7) 상태 관리">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="g" value="전역 상태(Toast)" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="idn" value="Identify" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="care" value="Care" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="gr" value="Growth" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mc" value="MyChild" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="400" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="per" value="로컬스토리지 동기화" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#d5e8d4;strokeColor:#82b366;" vertex="1" parent="1">
+          <mxGeometry x="300" y="240" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="idn" target="per">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="care" target="per">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="mc" target="per">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-8" name="8) 기술 스택">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="br" value="브라우저" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="re" value="React 18" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="240" y="80" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="rt" value="Router v6" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="ui" value="shadcn/ui" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="560" y="80" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mo" value="Framer Motion" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="720" y="80" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="tw" value="Tailwind CSS" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#dae8fc;strokeColor:#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="560" y="160" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="br" target="re">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="re" target="rt">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="re" target="ui">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="re" target="mo">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=block;html=1;strokeColor:#333333;" edge="1" parent="1" source="ui" target="tw">
+          <mxGeometry as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-9" name="9) 사용자 여정">
+    <mxGraphModel dx="1280" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="s" value="발견 → 식별 → 관리 → 예측 → 지속사용" style="rounded=1;whiteSpace=wrap;html=1;fillColor:#e1d5e7;strokeColor:#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="600" height="100" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
